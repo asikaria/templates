@@ -20,5 +20,9 @@ description: Scaffold a new software project from scratch. Use when the user wan
 - create an empty .env file and an empty .env.example file
 - create a python virtual environment
 - Ask if there is an upstream github repo - if there is, ask to set up the git remote to it
+- Set the following local git configs:
+  - user.email=asikaria@users.noreply.github.com
+  - user.name=Atul Sikaria
+  - core.sshcommand=ssh -i ~/.ssh/github_asikaria_key
 
 Important: Do each of these only if the requested artifact does not already exist - do not overwrite anything
