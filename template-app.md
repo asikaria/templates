@@ -1,6 +1,6 @@
 # Template and Instructions for a new app
 
-This lays out the generic layout of any new web app. Scale is optimized for small scale app with single developer. Some parts (e.g., lack of kubernetes, lack of ansible, instance types, etc.) will need to re-evaluated if app has high usgage volume or there are multiple developers involved.
+This lays out the generic layout of any new web app. Scale is optimized for small scale app with single developer. Some parts (e.g., lack of kubernetes, lack of ansible, instance types, etc.) will need to be re-evaluated if app has high usage volume or there are multiple developers involved.
 
 ## AWS
 
@@ -21,7 +21,7 @@ This lays out the generic layout of any new web app. Scale is optimized for smal
   - backend: route to EC2 instance on frontend as NAT gateway
 - persistent IP address (Elastic IP) for frontend instance, that dns can point to
 - persistent ebs volume for postgres data, attached to instance hosting postgres
-- official postgres docker image has a feature to run an init SQL script if the database's data directory on filesystem is empty. Use that to run initialization sql script to create schema. Only runs the first time at bring-up - subseqent schema updates need to be manually done.
+- official postgres docker image has a feature to run an init SQL script if the database's data directory on filesystem is empty. Use that to run initialization sql script to create schema. Only runs the first time at bring-up - subsequent schema updates need to be manually done.
 - use existing aws keypair (make sure public key is uploaded to aws in the correct region)
 - ECR (Elastic Container Registry) to host docker images; Separate repos per environment.
 - in the aws provider block, create default tags of "project" and "environment"
@@ -47,7 +47,7 @@ This lays out the generic layout of any new web app. Scale is optimized for smal
 - Initially, during prototype, just use username on the login screen with no password as authentication. Eventually add auth0 as authn/authz.
 - If using python, use flask + gunicorn, and use htmx and/or jinja2 for content
 - If node js, use express
-- screate a "scripts" directory and put any automation in there (e.g., deploy script, image publish script, certbot initial bootstrap dance for certs, etc.)
+- create a "scripts" directory and put any automation in there (e.g., deploy script, image publish script, certbot initial bootstrap dance for certs, etc.)
 
 ## docker and docker-compose
 
@@ -58,7 +58,7 @@ This lays out the generic layout of any new web app. Scale is optimized for smal
 ## TLS and Certs
 
 - use Let's Encrypt and Certbot, with nginx directory in website's path used for cert validation (not DNS based validation)
-- create a script to do the bootstrap with nginx and certbot dance on port 80 and setting up the cron job for renewal. The script should download the certs in a tarball to local computer, so if the environment is destroyed and recreated, we dont have t fetch new certs again from let's encrypt. This matters for stage, because we will do terrafrom destroy against stage, which will wipe the fetched certs on the ec2 instance.
+- create a script to do the bootstrap with nginx and certbot dance on port 80 and setting up the cron job for renewal. The script should download the certs in a tarball to local computer, so if the environment is destroyed and recreated, we dont have to fetch new certs again from let's encrypt. This matters for stage, because we will do terraform destroy against stage, which will wipe the fetched certs on the ec2 instance.
 
 ## Cloudflare
 
@@ -80,9 +80,9 @@ This lays out the generic layout of any new web app. Scale is optimized for smal
 
 
 - create a docs/ directory, and put design docs and claude plan output in there.
-- Create an architecture.md in docs/ directory that lays out the technical architecture and design and component details of the project. Reference it in cluade.md
+- Create an architecture.md in docs/ directory that lays out the technical architecture and design and component details of the project. Reference it in claude.md
 - create a scripts/ directory that has ad-hoc automation scripts (e.g., deploy, build, publish images, etc., etc., as needed)
-- create a LICENSE file that has an al rights reserved/not-open-source copyright notice
+- create a LICENSE file that has an all rights reserved/not-open-source copyright notice
 - set up an AGENTS.md. The purpose of it is not to document the architecture, but to document instructions to claude on how to operate. Put a reference to the architecture.md in agents.md
 - Set up an CLAUDE.md that contains nothing and points to AGENTS.md
 - create a skills directory under .claude
